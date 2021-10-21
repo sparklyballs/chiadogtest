@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-# copy config if not exists in /config
-[[ ! -d "/config" ]] && mkdir -p /config
-
-[[ ! -e "/config/config.yaml" ]] && cp /chiadog/config-example.yaml /config/config.yaml
-
-# permissions
-chown -R abc:abc /config

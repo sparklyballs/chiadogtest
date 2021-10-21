@@ -1,6 +1,4 @@
-#!/usr/bin/with-contenv bash
-
-cd /chiadog || exit 1
+#!/usr/bin/env bash
 
 # set timezone
 # shellcheck disable=SC2154
@@ -9,9 +7,12 @@ if [[ -n "${TZ}" ]]; then
   ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone
 fi
 
+# copy config if not exists in /config
+[[ ! -d "/config" ]] && mkdir -p /config
+
+[[ ! -e "/config/config.yaml" ]] && cp /chiadog/config-example.yaml /config/config.yaml
+
 # start application
 # shellcheck disable=SC1091
 . ./venv/bin/activate
-
-exec \
-s6-setuidgid abc python3 main.py --config /config/config.yaml
+python3 main.py --config /config/config.yaml

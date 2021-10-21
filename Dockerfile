@@ -1,5 +1,5 @@
 ARG UBUNTU_VER="focal"
-FROM sparklyballs/ubuntu-test:${UBUNTU_VER}
+FROM ubuntu:${UBUNTU_VER}
 
 # build arguments
 ARG DEBIAN_FRONTEND=noninteractive
@@ -63,4 +63,5 @@ RUN \
 		/var/tmp/*
 
 # add local files
-COPY root/ /
+ADD entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["bash", "/entrypoint.sh"]
