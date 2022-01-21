@@ -1,5 +1,4 @@
-ARG UBUNTU_VER="focal"
-FROM ubuntu:${UBUNTU_VER}
+FROM python:3.9 AS chiadog_build
 
 # build arguments
 ARG DEBIAN_FRONTEND=noninteractive
@@ -11,18 +10,36 @@ ENV TZ="UTC"
 # install dependencies
 RUN \
 	apt-get update \
-	&& apt-get install -y \
-	--no-install-recommends \
-		build-essential \
+	&& apt-get install \
+	--no-install-recommends -y \
 		ca-certificates \
 		curl \
-		git \
 		jq \
-		openssl \
-		python3-dev \
-		python3-pip \
-		python3-venv \
-		sudo \
+		lsb-release \
+		sudo
+
+# set workdir
+WORKDIR /chiadog
+
+# build package
+RUN \
+	if [ -z ${RELEASE+x} ]; then \
+	RELEASE=$(curl -u "${SECRETUSER}:${SECRETPASS}" -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" \
+	| jq -r ".tag_name"); \
+	fi \
+	&& git clone -b "${RELEASE}" https://github.com/martomi/chiadog.git . \
+	&& /bin/bash install.sh
+
+FROM python:3.9-slim
+
+# set workdir
+WORKDIR /chiadog
+
+# install dependencies
+RUN \
+	apt-get update \
+	&& apt-get install \
+	--no-install-recommends -y \
 		tzdata \
 	\
 # set timezone
@@ -38,29 +55,8 @@ RUN \
 		/var/lib/apt/lists/* \
 		/var/tmp/*
 
-# set workdir for build stage
-WORKDIR /chiadog
-
-# set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# build package
-RUN \
-	if [ -z ${RELEASE+x} ]; then \
-	RELEASE=$(curl -u "${SECRETUSER}:${SECRETPASS}" -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" \
-	| jq -r ".tag_name"); \
-	fi \
-	&& git clone -b "${RELEASE}" https://github.com/martomi/chiadog.git \
-		/chiadog \		
-	&& /bin/bash install.sh \
-	\
-# cleanup
-	\
-	&& rm -rf \
-		/root/.cache \
-		/tmp/* \
-		/var/lib/apt/lists/* \
-		/var/tmp/*
+# copy build files
+COPY --from=chiadog_build /chiadog /chiadog
 
 # add local files
 ADD entrypoint.sh /entrypoint.sh
