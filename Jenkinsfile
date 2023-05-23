@@ -1,6 +1,6 @@
 node('DOCKER_BUILD_X86_64') {
 
-def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"| tr -d v', returnStdout: true)
+def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true)
 def app
 
 
@@ -15,7 +15,7 @@ def app
          * docker build on the command line */
 
 
-        app = docker.build("$DOCKERHUB_REPOSITORY")
+        app = docker.build("$DOCKERHUB_REPOSITORY","--build-arg RELEASE="${RELEASE}")
     }
 
     stage('Push image') {
