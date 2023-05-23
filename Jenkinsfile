@@ -27,7 +27,6 @@ steps {
 	--no-cache \
 	--pull \
 	-t $CONTAINER_REPOSITORY:latest \
-	-t $CONTAINER_REPOSITORY:$BUILD_NUMBER \
 	-t $CONTAINER_REPOSITORY:$RELEASE_VER \
 	--build-arg RELEASE=$RELEASE_VER \
 	.')
@@ -38,7 +37,6 @@ stage('Push Docker Images') {
 steps {
 	sh ('echo $CREDS_DOCKERHUB_PSW | docker login -u $CREDS_DOCKERHUB_USR --password-stdin')
 	sh ('docker image push $CONTAINER_REPOSITORY:latest')
-	sh ('docker image push $CONTAINER_REPOSITORY:$BUILD_NUMBER')
 	sh ('docker image push $CONTAINER_REPOSITORY:$RELEASE_VER')
 	}
 	}
