@@ -24,3 +24,4 @@ stage('Build image') {
 	--no-cache \
 	--build-arg RELEASE=\"${RELEASE}\" ."
 	}
+}
