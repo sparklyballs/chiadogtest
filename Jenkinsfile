@@ -21,7 +21,7 @@ script{
 stage('Build image') {
 steps {
 	sh "docker buildx build \
-	-t chiadog:"${BUILD_NUMBER}" \
+	-t chiadog \
 	--no-cache \
 	--build-arg RELEASE=\"${RELEASE}\" ."
 	}
