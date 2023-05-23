@@ -7,13 +7,6 @@ node('DOCKER_BUILD_X86_64') {
         checkout scm
     }
 
-    stage('Get Version') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
-
-        sh RELEASE="\$("""curl -u "${SECRETUSER}:${SECRETPASS}" -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"")"
-    }
-
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
@@ -36,7 +29,7 @@ node('DOCKER_BUILD_X86_64') {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://registry.hub.docker.com', '420d305d-4feb-4f56-802b-a3382c561226') {
-            app.push("${env.RELEASE}")
+            app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
     }
