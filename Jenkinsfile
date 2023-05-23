@@ -36,11 +36,5 @@ steps {
 	sh "docker tag \
 	\"${env.DOCKERHUB_REPOSITORY}\":\"${env.BUILD_NUMBER}\" \
 	\"${env.DOCKERHUB_REPOSITORY}\":\"${env.RELEASE}\"
-
-	sh "docker tag \
-	\"${env.DOCKERHUB_REPOSITORY}\":\"${env.BUILD_NUMBER}\" \
-	\"${env.DOCKERHUB_REPOSITORY}\":latest \
-	}
-	}
 }
 }
