@@ -23,6 +23,7 @@ stage('Build image') {
 steps {
 	sh "docker buildx build \
 	--no-cache \
+	--pull \
 	-t \"${env.DOCKERHUB_REPOSITORY}\":\"${env.BUILD_NUMBER}\" \
 	--build-arg RELEASE=\"${env.RELEASE_VER}\" \
 	."
