@@ -1,7 +1,8 @@
 node('DOCKER_BUILD_X86_64') {
 
 environment { 
-def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true)
+/* def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true) */
+def RELEASE = cheese
 }
     def app
 
