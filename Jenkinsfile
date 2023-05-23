@@ -8,7 +8,7 @@ environment {
 	CREDS_GITHUB=credentials('bd8b00ff-decf-4a75-9e56-1ea2c7d0d708')
 	CONTAINER_NAME = 'chiadogtest'
 	CONTAINER_REPOSITORY = 'sparklyballs/chiadogtest'
-	RELEASE_PARAMS = 'curl -sX GET https://api.github.com/repos/martomi/chiadog/releases/latest | jq -r ".tag_name"'
+	RELEASE_PARAMS = 'https://api.github.com/repos/martomi/chiadog/releases/latest | jq -r ".tag_name"'
 	}
 
 stages {
@@ -16,7 +16,7 @@ stages {
 stage('Get Release Version') {
 steps {
 script{
-	env.RELEASE_VER = sh(script: '$RELEASE_PARAMS', returnStdout: true).trim() 
+	env.RELEASE_VER = sh(script: 'curl -sX GET "${RELEASE_PARAMS}"', returnStdout: true).trim() 
 	}
 	}
 	}
