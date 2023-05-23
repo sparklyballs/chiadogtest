@@ -1,10 +1,11 @@
+script {
+def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true)
+echo "RELEASE is ${RELEASE}"
+}
+
 node('DOCKER_BUILD_X86_64') {
     def app
 
-    script {
-    def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true)
-    echo "RELEASE is ${RELEASE}"
-    }
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
