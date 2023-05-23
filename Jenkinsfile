@@ -40,7 +40,7 @@ steps {
 
 	sh ('docker image tag \
 	$CONTAINER_REPOSITORY:$BUILD_NUMBER \
-	$CONTAINER_REPOSITORY}:latest')
+	$CONTAINER_REPOSITORY:latest')
 	}
 	}
 
