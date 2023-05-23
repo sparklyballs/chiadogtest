@@ -11,7 +11,7 @@ node('DOCKER_BUILD_X86_64') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        sh RELEASE="$("""curl -u "${SECRETUSER}:${SECRETPASS}" -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"")"
+        sh RELEASE="\$("""curl -u "${SECRETUSER}:${SECRETPASS}" -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"")"
     }
 
     stage('Build image') {
