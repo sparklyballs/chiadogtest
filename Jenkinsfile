@@ -1,4 +1,4 @@
-node('DOCKER_BUILD_X86_64'){
+node('DOCKER_BUILD_X86_64') {
     def app
 
     stage('Clone repository') {
