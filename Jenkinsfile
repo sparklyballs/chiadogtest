@@ -12,24 +12,12 @@ environment {
 	}
 
 stages {
-stage('Dangerous shit') {
-steps {
-                echo "username is ${env.DOCKERHUB_CREDS_USR}"
-                echo "password is ${env.DOCKERHUB_CREDS_PSW}"
-	}
-	}
 
 stage('Get RELEASE') {
 steps {
 script{
 	env.RELEASE_VER = sh(script: 'curl -sX GET "${RELEASE_PARAMS}" | jq -r ".tag_name"', returnStdout: true).trim() 
 	}
-	}
-	}
-
-stage('Push images') {
-steps {
-	sh ('echo $DOCKERHUB_CREDS_PSW | docker login -u $DOCKERHUB_CREDS_USR --password-stdin')
 	}
 	}
 
@@ -53,6 +41,12 @@ steps {
 	sh "docker image tag \
 	\"${env.DOCKERHUB_REPOSITORY}\":\"${env.BUILD_NUMBER}\" \
 	\"${env.DOCKERHUB_REPOSITORY}\":latest"
+	}
+	}
+
+stage('Push images') {
+steps {
+	sh ('echo $DOCKERHUB_CREDS_PSW | docker login -u $DOCKERHUB_CREDS_USR --password-stdin')
 	}
 	}
 
