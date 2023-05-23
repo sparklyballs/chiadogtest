@@ -23,12 +23,12 @@ script{
 
 stage('Build image') {
 steps {
-	sh "docker buildx build \
+	sh ('docker buildx build \
 	--no-cache \
 	--pull \
-	-t \"${env.DOCKERHUB_REPOSITORY}\":\"${env.BUILD_NUMBER}\" \
-	--build-arg RELEASE=\"${env.RELEASE_VER}\" \
-	."
+	-t $DOCKERHUB_REPOSITORY:$BUILD_NUMBER \
+	--build-arg RELEASE=$RELEASE_VER \
+	.')
 	}
 	}
 
