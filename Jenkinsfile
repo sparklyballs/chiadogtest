@@ -25,3 +25,4 @@ stage('Build image') {
 	--build-arg RELEASE=\"${RELEASE}\" ."
 	}
 }
+}
