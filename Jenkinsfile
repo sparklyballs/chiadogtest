@@ -1,9 +1,3 @@
-environment {
-	script {
-	def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true)
-	}
-    }
-
 node('DOCKER_BUILD_X86_64') {
 
     def app
@@ -34,4 +28,4 @@ node('DOCKER_BUILD_X86_64') {
         }
     }
 }
-}
+
