@@ -14,7 +14,7 @@ stages {
 stage('Get RELEASE') {
 steps {
 script{
-	env.RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true) 
+	env.RELEASE_VER = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true) 
 	}
 	}
 	}
@@ -23,7 +23,7 @@ steps {
 	sh "docker buildx build \
 	-t chiadog \
 	--no-cache \
-	--build-arg RELEASE=\"${RELEASE}\" ."
+	--build-arg RELEASE=\"${RELEASE_VER}\" ."
 	}
 	}
 }
