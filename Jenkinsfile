@@ -26,7 +26,7 @@ node('DOCKER_BUILD_X86_64') {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
     script {
-    def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true)
+    echo "RELEASE is ${RELEASE}"
     }
         docker.withRegistry('https://registry.hub.docker.com', '420d305d-4feb-4f56-802b-a3382c561226') {
             app.push(${env.RELEASE})
