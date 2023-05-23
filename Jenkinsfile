@@ -21,7 +21,7 @@ script{
 stage('Build image') {
 steps {
 	sh "docker buildx build \
-	-t chiadog \
+	-t "${env.DOCKERHUB_REPOSITORY}" \
 	--no-cache \
 	."
 	}
