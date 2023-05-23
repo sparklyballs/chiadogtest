@@ -51,7 +51,7 @@ steps {
 
 stage('Push images') {
 steps {
-	sh 'echo ${env.DOCKERHUB_CREDS_PSW} | docker login -u ${env.DOCKERHUB_CREDS_USR} --password-stdin'
+	sh ('echo ${env.DOCKERHUB_CREDS_PSW} | docker login -u ${env.DOCKERHUB_CREDS_USR} --password-stdin')
 	}
 	}
 }
