@@ -34,4 +34,4 @@ node('DOCKER_BUILD_X86_64') {
         }
     }
 }
-
+}
