@@ -32,5 +32,3 @@ steps {
 	--build-arg RELEASE=\"${RELEASE}\" ."
 	}
 	}
-}
-}
