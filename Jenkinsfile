@@ -12,7 +12,6 @@ environment {
 	}
 
 stages {
-
 stage('Get RELEASE') {
 steps {
 script{
@@ -20,7 +19,6 @@ script{
 	}
 	}
 	}
-
 stage('Build image') {
 steps {
 	sh "docker buildx build \
@@ -30,11 +28,5 @@ steps {
 	."
 	}
 	}
-
-stage('Tag image') {
-steps {
-	sh "docker tag \
-	\"${env.DOCKERHUB_REPOSITORY}\":\"${env.BUILD_NUMBER}\" \
-	\"${env.DOCKERHUB_REPOSITORY}\":\"${env.RELEASE}\"
 }
 }
