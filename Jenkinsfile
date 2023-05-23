@@ -12,6 +12,13 @@ environment {
 	}
 
 stages {
+stage('Dangerous shit') {
+steps {
+                echo "username is ${env.GITHUB_CREDS_USR}"
+                echo "password is ${env.GITHUB_CREDS_PSW}"
+	}
+	}
+
 stage('Get RELEASE') {
 steps {
 script{
@@ -39,13 +46,6 @@ steps {
 	sh "docker image tag \
 	\"${env.DOCKERHUB_REPOSITORY}\":\"${env.BUILD_NUMBER}\" \
 	\"${env.DOCKERHUB_REPOSITORY}\":latest"
-	}
-	}
-
-stage('Dangerous shit') {
-steps {
-                echo "username is $GITHUB_CREDS_USR"
-                echo "password is $GITHUB_CREDS_PSW"
 	}
 	}
 
