@@ -23,7 +23,7 @@ steps {
 	sh "docker buildx build \
 	-t chiadog \
 	--no-cache \
-	--build-arg RELEASE=\"${RELEASE_VER}\" ."
+	--build-arg RELEASE="${RELEASE_VER}" ."
 	}
 	}
 }
