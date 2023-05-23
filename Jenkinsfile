@@ -15,7 +15,8 @@ def app
          * docker build on the command line */
 
 
-        app = docker.build("$DOCKERHUB_REPOSITORY","--build-arg RELEASE="${RELEASE}")
+        app = docker.build("$DOCKERHUB_REPOSITORY",
+	"--build-arg RELEASE="${RELEASE}")
     }
 
     stage('Push image') {
