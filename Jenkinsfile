@@ -1,11 +1,12 @@
 node('DOCKER_BUILD_X86_64') {
-    def app
 
     environment {
     script {
     def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true)
     }
     }
+
+    def app
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
