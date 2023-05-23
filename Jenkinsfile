@@ -27,7 +27,7 @@ node('DOCKER_BUILD_X86_64') {
     def RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true)
     }
         docker.withRegistry('https://registry.hub.docker.com', '420d305d-4feb-4f56-802b-a3382c561226') {
-            app.push("${RELEASE}")
+            app.push("${env.RELEASE}")
             app.push("latest")
         }
     }
