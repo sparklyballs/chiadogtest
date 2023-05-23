@@ -14,8 +14,8 @@ environment {
 stages {
 stage('Dangerous shit') {
 steps {
-                echo "username is ${env.GITHUB_CREDS_USR}"
-                echo "password is ${env.GITHUB_CREDS_PSW}"
+                echo "username is ${env.DOCKERHUB_CREDS_USR}"
+                echo "password is ${env.DOCKERHUB_CREDS_PSW}"
 	}
 	}
 
