@@ -15,7 +15,7 @@ stages {
 stage('Get RELEASE') {
 steps {
 script{
-	env.RELEASE_VER = sh(script: 'curl -sX GET "${RELEASE_PARAMS}" | jq -r ".tag_name"', returnStdout: true) 
+	env.RELEASE_VER = sh(script: 'curl -sX GET "${RELEASE_PARAMS}" | jq -r ".tag_name"', returnStdout: true).trim() 
 	}
 	}
 	}
@@ -24,7 +24,7 @@ steps {
 	sh "docker buildx build \
 	--no-cache \
 	-t \"${env.DOCKERHUB_REPOSITORY}\" \
-	--build-arg RELEASE="${env.RELEASE_VER}" \
+	--build-arg RELEASE=\"${env.RELEASE_VER}\" \
 	."
 	}
 	}
