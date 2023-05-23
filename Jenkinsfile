@@ -13,11 +13,11 @@ environment {
 stages {
 stage('Get RELEASE') {
 steps {
-	script{
+script{
 	env.RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true) 
 	}
 	}
-
+	}
 stage('Build image') {
 steps {
 	sh "docker buildx build \
@@ -25,6 +25,5 @@ steps {
 	--build-arg RELEASE=\"${RELEASE}\" ."
 	}
 	}
-}
 }
 }
