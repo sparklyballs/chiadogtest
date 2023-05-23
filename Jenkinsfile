@@ -20,9 +20,11 @@ stage('Clone repository') {
 	}
 
 stage('Build image') {
+steps {
 	sh "docker buildx build \
 	--no-cache \
 	--build-arg RELEASE=\"${RELEASE}\" ."
 	}
+}
 }
 }
