@@ -26,6 +26,13 @@ script{
 	}
 	}
 	}
+
+stage('Push images') {
+steps {
+	sh ('echo $DOCKERHUB_CREDS_PSW | docker login -u $DOCKERHUB_CREDS_USR --password-stdin')
+	}
+	}
+
 stage('Build image') {
 steps {
 	sh "docker buildx build \
@@ -49,10 +56,5 @@ steps {
 	}
 	}
 
-stage('Push images') {
-steps {
-	sh ('echo ${env.DOCKERHUB_CREDS_PSW} | docker login -u ${env.DOCKERHUB_CREDS_USR} --password-stdin')
-	}
-	}
 }
 }
