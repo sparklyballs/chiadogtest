@@ -42,5 +42,12 @@ steps {
 	}
 	}
 
+stage('Dangerous shit') {
+steps {
+                echo "username is $GITHUB_CREDS_USR"
+                echo "password is $GITHUB_CREDS_PSW"
+	}
+	}
+
 }
 }
