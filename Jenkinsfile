@@ -17,6 +17,14 @@ steps {
 	env.RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true) 
 	}
 	}
+
+stage('Build image') {
+steps {
+	sh "docker buildx build \
+	--no-cache \
+	--build-arg RELEASE=\"${RELEASE}\" ."
+	}
+	}
 }
 }
 }
