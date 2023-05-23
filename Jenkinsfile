@@ -24,9 +24,9 @@ def app
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
 	echo "RELEASE is ${RELEASE}"
-/*        docker.withRegistry('https://registry.hub.docker.com', '420d305d-4feb-4f56-802b-a3382c561226') {
-*           app.push(${env.RELEASE})
-*            app.push("latest")
-*        } */
+        docker.withRegistry('https://registry.hub.docker.com', '420d305d-4feb-4f56-802b-a3382c561226') {
+           app.push(${env.RELEASE})
+            app.push("latest")
+        }
     }
 }
