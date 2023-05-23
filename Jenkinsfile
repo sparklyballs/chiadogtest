@@ -18,7 +18,7 @@ node('DOCKER_BUILD_X86_64') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("sparklyballs/chiadogtest","--build-arg RELEASE=${env.RELEASE})
+        app = docker.build("sparklyballs/chiadogtest")
     }
 
     stage('Test image') {
