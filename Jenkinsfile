@@ -16,9 +16,14 @@ steps {
 	script{
 	env.RELEASE = sh(script: 'curl -sX GET "https://api.github.com/repos/martomi/chiadog/releases/latest" | jq -r ".tag_name"', returnStdout: true) 
 	}
+	}
 
 stage('Clone repository') {
+steps {
+
 	checkout scm
+	}
+	}
 
 stage('Build image') {
 steps {
@@ -26,7 +31,5 @@ steps {
 	--no-cache \
 	--build-arg RELEASE=\"${RELEASE}\" ."
 	}
-}
-}
-}
+	}
 }
