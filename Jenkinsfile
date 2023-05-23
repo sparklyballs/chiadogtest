@@ -15,7 +15,7 @@ stages {
 
 stage('Checkout Git Repository') {
 steps {
-	git url: 'https://github.com/\"${env.CONTAINER_REPOSITORY}\".git', branch: 'master',
+	git url: 'https://github.com/\"${CONTAINER_REPOSITORY}\".git', branch: 'master',
 	credentialsId: 'bd8b00ff-decf-4a75-9e56-1ea2c7d0d708'
 	}
 	}
