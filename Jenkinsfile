@@ -24,7 +24,7 @@ steps {
 	sh "docker buildx build \
 	--no-cache \
 	-t \"${env.DOCKERHUB_REPOSITORY}\" \
-	--build-arg RELEASE=\"${env.RELEASE_VER}\" \
+	--build-arg RELEASE="${env.RELEASE_VER}" \
 	."
 	}
 	}
