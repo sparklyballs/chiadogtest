@@ -30,11 +30,6 @@ steps {
 	ghcr.io/hadolint/hadolint \
 	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json \
 	/Dockerfile | tee hadolint_lint.txt')
-    post {
-        always {
-	recordIssues enabledForFailure: true, tool: hadoLint(pattern: 'hadolint_lint.txt')	
-	}
-	}
 	}
 	}
 
@@ -59,4 +54,10 @@ steps {
 	}
 
 }
+
+post {
+always {
+	recordIssues enabledForFailure: true, tool: hadoLint(pattern: 'hadolint_lint.txt')	
+	}
+	}
 }
