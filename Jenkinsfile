@@ -30,7 +30,7 @@ steps {
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	sparklyballs/hadolint \
 	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 \
-	--config /config/hadolint.yaml --format json /Dockerfile > $WORKSPACE/hadolint-result.xml')
+	--format json /Dockerfile > $WORKSPACE/hadolint-result.xml')
 	}
 post {
 always {
