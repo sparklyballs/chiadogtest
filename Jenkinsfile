@@ -25,7 +25,7 @@ stage ("Lint Dockerfile") {
 steps {
 	sh ('docker pull sparklyballs/hadolint')
 	sh ('docker run \
-	--rm=true -it \
+	--rm=true -t \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	sparklyballs/hadolint \
 	hadolint /Dockerfile > $WORKSPACE/hadolint-result.xml')
