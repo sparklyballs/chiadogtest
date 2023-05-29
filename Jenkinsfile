@@ -23,6 +23,7 @@ script{
 
 stage ("lint dockerfile") {
 agent {
+	label 'DOCKER_BUILD_X86_64'
 docker {
 	image 'hadolint/hadolint:latest-debian'
 	//image 'ghcr.io/hadolint/hadolint:latest-debian'
