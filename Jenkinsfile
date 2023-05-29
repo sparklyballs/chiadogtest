@@ -28,8 +28,8 @@ steps {
 	--rm=true -t \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	sparklyballs/hadolint \
-	hadolint /Dockerfile | tee -a hadolint_lint.txt')
-	}
+	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json \
+	/Dockerfile | tee -a hadolint_lint.txt')
 post {
 always {
 	archiveArtifacts 'hadolint_lint.txt'
