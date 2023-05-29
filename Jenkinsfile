@@ -24,18 +24,12 @@ script{
 stage ("Lint Dockerfile") {
 steps {
 	sh ('docker pull sparklyballs/hadolint')
-	sh ('ls -lah $WORKSPACE')
 	sh ('docker run \
 	--rm=true -t \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	sparklyballs/hadolint \
 	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 \
 	--format json /Dockerfile > $WORKSPACE/hadolint-result.xml')
-	}
-post {
-always {
-	archiveArtifacts '$WORKSPACE/hadolint-result.xml'
-	}
 	}
 	}
 
