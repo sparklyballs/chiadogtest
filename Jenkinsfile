@@ -30,6 +30,11 @@ steps {
 	sparklyballs/hadolint /bin/sh -c \
 	"hadolint /Dockerfile | tee -a hadolint_lint.txt"')
 	}
+post {
+always {
+	archiveArtifacts 'hadolint_lint.txt'
+	}
+	}
 	}
 
 stage('Build Docker Image') {
