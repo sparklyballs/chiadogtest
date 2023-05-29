@@ -23,7 +23,7 @@ script{
 
 stage ("Lint Dockerfile") {
 steps {
-	def hadolint = sh ('docker pull ghcr.io/hadolint/hadolint')
+	sh ('docker pull ghcr.io/hadolint/hadolint')
 	sh ('docker run \
 	--rm  -i \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
