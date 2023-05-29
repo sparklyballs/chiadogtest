@@ -34,7 +34,7 @@ steps {
 	}
 post {
 always {
-	archiveArtifacts 'hadolint-result.xml'
+	archiveArtifacts '$WORKSPACE/hadolint-result.xml'
 	}
 	}
 	}
