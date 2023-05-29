@@ -27,8 +27,8 @@ steps {
 	sh ('docker run \
 	--rm=true -t \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
-	sparklyballs/hadolint \
-	hadolint /Dockerfile > blah.txt')
+	sparklyballs/hadolint /bin/bash -c \
+	"hadolint /Dockerfile > blah.txt"')
 	}
 	}
 
