@@ -36,6 +36,7 @@ steps {
 	}
 	}
 	}
+	}
 
 stage('Build Docker Image') {
 steps {
