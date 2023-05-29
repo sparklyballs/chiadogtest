@@ -33,6 +33,11 @@ steps {
 	}
 	}
 
+stage ("Analyis") {
+	def hadolint = scanForIssues tool: hadolint(pattern: 'hadolint_lint.txt')
+	publishIssues issues: [hadolint]
+	}
+
 stage('Build Docker Image') {
 steps {
 	sh ('docker buildx build \
