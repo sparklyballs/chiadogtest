@@ -23,7 +23,7 @@ script{
 
 stage ("Lint Dockerfile") {
 steps {
-	sh ('docker pull ghcr.io/hadolint/hadolint')
+	def hadolint = sh ('docker pull ghcr.io/hadolint/hadolint')
 	sh ('docker run \
 	--rm  -i \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
@@ -33,7 +33,7 @@ steps {
 	}
 post {
 always {
-	recordIssues enabledForFailure: true, tool: checkstyle(pattern: 'hadolint_lint.txt')
+	recordIssues enabledForFailure: true, tool: hadolint(pattern: 'hadolint_lint.txt')
 	}
 	}
 	}
