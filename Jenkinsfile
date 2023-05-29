@@ -28,12 +28,12 @@ steps {
 	--rm  -i \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	ghcr.io/hadolint/hadolint \
-	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format checkstyle \
+	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json \
 	/Dockerfile | tee hadolint_lint.txt')
 	}
 post {
 always {
-	archiveArtifacts 'hadolint_lint.txt'
+	recordIssues enabledForFailure: true, tool: hadolint(pattern: '**/hadolint_lint.txt')
 	}
 	}
 	}
