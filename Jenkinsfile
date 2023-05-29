@@ -25,11 +25,10 @@ stage ("Lint Dockerfile") {
 steps {
 	sh ('docker pull sparklyballs/hadolint')
 	sh ('docker run \
-	--rm=true -t \
+	--rm=true -it \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	sparklyballs/hadolint \
-	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 \
-	--format json /Dockerfile > $WORKSPACE/hadolint-result.xml')
+	hadolint /Dockerfile > $WORKSPACE/hadolint-result.xml')
 	}
 	}
 
