@@ -28,7 +28,7 @@ steps {
 	--rm=true -t \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	sparklyballs/hadolint /bin/sh -c \
-	"hadolint /Dockerfile > blah.txt"')
+	"hadolint /Dockerfile | tee -a hadolint_lint.txt"')
 	}
 	}
 
