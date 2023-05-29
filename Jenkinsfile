@@ -9,20 +9,20 @@ environment {
 	CONTAINER_NAME = 'chiadogtest'
 	CONTAINER_REPOSITORY = 'sparklyballs/chiadogtest'
 	HADOLINT_OPTIONS = '--ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json'
-	RELEASE_PARAMS = 'https://api.github.com/repos/martomi/chiadog/releases/latest'
+	RELEASE_URL = 'https://api.github.com/repos/martomi/chiadog/releases/latest'
 	}
 
 stages {
 
-stage('Get Release Version') {
+stage('Query Release Version') {
 steps {
 script{
-	env.RELEASE_VER = sh(script: 'curl -sX GET "${RELEASE_PARAMS}" | jq -r ".tag_name"', returnStdout: true).trim() 
+	env.RELEASE_VER = sh(script: 'curl -sX GET "${RELEASE_URL}" | jq -r ".tag_name"', returnStdout: true).trim() 
 	}
 	}
 	}
 
-stage ("Linting") {
+stage ("Do Some Linting") {
 steps {
 	sh ('docker pull ghcr.io/hadolint/hadolint')
 	sh ('docker run \
@@ -46,7 +46,7 @@ steps {
 	}
 	}
 
-stage('Push Docker Images') {
+stage('Push Docker Image and Tags') {
 steps {
 	sh ('echo $CREDS_DOCKERHUB_PSW | docker login -u $CREDS_DOCKERHUB_USR --password-stdin')
 	sh ('docker image push $CONTAINER_REPOSITORY:latest')
