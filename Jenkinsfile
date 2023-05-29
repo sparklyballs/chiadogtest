@@ -30,7 +30,7 @@ steps {
 	ghcr.io/hadolint/hadolint \
 	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json \
 	/Dockerfile | tee hadolint_lint.txt')
-	publishIssues enabledForFailure: true, tool: hadolint(pattern: '**/target/hadolint_lint.txt')
+	publishIssues enabledForFailure: false, tool: hadolint(pattern: '**/target/hadolint_lint.txt')
 	}
 	}
 
