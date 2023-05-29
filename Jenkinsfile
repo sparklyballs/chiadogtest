@@ -24,12 +24,13 @@ script{
 stage ("Lint Dockerfile") {
 steps {
 	sh ('docker pull ghcr.io/hadolint/hadolint')
-	sh ('docker run \
+	def hadolint = sh ('docker run \
 	--rm  -i \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	ghcr.io/hadolint/hadolint \
 	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json \
 	/Dockerfile | tee hadolint_lint.txt')
+	publishIssues issues: [hadolint]
 	}
 	}
 
