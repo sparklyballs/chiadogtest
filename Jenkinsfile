@@ -30,7 +30,7 @@ steps {
 	ghcr.io/hadolint/hadolint \
 	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 \
 	/Dockerfile | tee hadolint_lint.txt')
-def hadolint = scanForIssues tool: hadolint(pattern: '**/hadolint_lint.txt')
+def hadolint = scanForIssues tool: hadolint(pattern: 'hadolint_lint.txt')
 publishIssues issues: [hadolint]
 	}
 	}
