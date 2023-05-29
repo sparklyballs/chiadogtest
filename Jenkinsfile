@@ -8,6 +8,7 @@ environment {
 	CREDS_GITHUB=credentials('bd8b00ff-decf-4a75-9e56-1ea2c7d0d708')
 	CONTAINER_NAME = 'chiadogtest'
 	CONTAINER_REPOSITORY = 'sparklyballs/chiadogtest'
+	HADOLINT_OPTIONS = '--ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json'
 	RELEASE_PARAMS = 'https://api.github.com/repos/martomi/chiadog/releases/latest'
 	}
 
@@ -21,14 +22,14 @@ script{
 	}
 	}
 
-stage ("Lint Dockerfile") {
+stage ("Linting") {
 steps {
 	sh ('docker pull ghcr.io/hadolint/hadolint')
 	sh ('docker run \
 	--rm  -i \
-	-v ${WORKSPACE}/Dockerfile:/Dockerfile \
+	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	ghcr.io/hadolint/hadolint \
-	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json \
+	hadolint $HADOLINT_OPTIONS \
 	/Dockerfile | tee hadolint_lint.txt')
 	}
 	}
