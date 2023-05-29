@@ -33,7 +33,7 @@ steps {
 	}
 post {
 always {
-	recordIssues enabledForFailure: true, tool: hadolint(pattern: '**/hadolint_lint.txt')
+	recordIssues enabledForFailure: true, tool: hadolint(pattern: 'hadolint_lint.txt')
 	}
 	}
 	}
