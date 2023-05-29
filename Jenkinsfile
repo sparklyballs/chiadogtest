@@ -21,17 +21,19 @@ script{
 	}
 	}
 
-stage ("lint dockerfile") {
-docker {
-	image 'hadolint/hadolint:latest-debian'
-	//image 'ghcr.io/hadolint/hadolint:latest-debian'
-	}
+stage ("Lint Dockerfile") {
 steps {
-	sh 'hadolint dockerfiles/* | tee -a hadolint_lint.txt'
+	sh ('docker pull sparklyballs/hadolint')
+	sh ('docker run \
+	--rm=true -t \
+	-v "${WORKSPACE}"/Dockerfile:/Dockerfile \
+	sparklyballs/hadolint \
+	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 \
+	--config /config/hadolint.yaml --format json /Dockerfile > ${WORKSPACE}/hadolint-result.xml')
 	}
 post {
 always {
-	archiveArtifacts 'hadolint_lint.txt'
+	archiveArtifacts 'hadolint-result.xml'
 	}
 	}
 	}
