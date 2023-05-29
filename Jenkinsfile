@@ -23,11 +23,11 @@ script{
 
 stage ("Lint Dockerfile") {
 steps {
-	sh ('docker pull sparklyballs/hadolint')
+	sh ('docker pull ghcr.io/hadolint/hadolint')
 	sh ('docker run \
-	--rm=true -t \
+	--rm  -i \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
-	sparklyballs/hadolint \
+	ghcr.io/hadolint/hadolint \
 	hadolint --ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json \
 	/Dockerfile | tee -a hadolint_lint.txt')
 	}
