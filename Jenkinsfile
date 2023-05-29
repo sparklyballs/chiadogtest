@@ -3,6 +3,10 @@ pipeline {
 	label 'DOCKER_BUILD_X86_64'
 	}
 
+options {
+	skipDefaultCheckout(true)
+	}
+
 environment {
 	CREDS_DOCKERHUB=credentials('420d305d-4feb-4f56-802b-a3382c561226')
 	CREDS_GITHUB=credentials('bd8b00ff-decf-4a75-9e56-1ea2c7d0d708')
@@ -19,6 +23,12 @@ steps {
 script{
 	env.RELEASE_VER = sh(script: 'curl -sX GET "${RELEASE_URL}" | jq -r ".tag_name"', returnStdout: true).trim() 
 	}
+	}
+	}
+
+stage('Checkout Repository') {
+steps {	cleanWs()
+	checkout scm
 	}
 	}
 
