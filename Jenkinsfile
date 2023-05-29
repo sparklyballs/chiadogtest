@@ -27,7 +27,8 @@ script{
 	}
 
 stage('Checkout Repository') {
-steps {	cleanWs()
+steps {
+	cleanWs()
 	checkout scm
 	}
 	}
