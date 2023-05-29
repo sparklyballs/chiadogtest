@@ -33,7 +33,7 @@ steps {
 	}
 	}
 
-stage ("Analyis") {
+stage ("Publish Linting") {
 	def hadolint = scanForIssues tool: hadolint(pattern: 'hadolint_lint.txt')
 	publishIssues issues: [hadolint]
 	}
