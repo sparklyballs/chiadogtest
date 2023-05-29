@@ -34,7 +34,6 @@ steps {
 	publishIssues issues: [hadolint]
 	}
 	}
-	}
 
 stage('Build Docker Image') {
 steps {
