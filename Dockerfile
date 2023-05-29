@@ -1,4 +1,4 @@
-FROM python AS chiadog_build
+FROM python:3.9 AS chiadog_build
 
 # build arguments
 ARG DEBIAN_FRONTEND=noninteractive
