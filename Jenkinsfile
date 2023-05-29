@@ -28,7 +28,7 @@ steps {
 	--rm=true -t \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
 	sparklyballs/hadolint \
-	hadolint /Dockerfile > hadolint-result.xml')
+	hadolint /Dockerfile')
 	}
 	}
 
