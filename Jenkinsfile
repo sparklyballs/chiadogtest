@@ -27,8 +27,8 @@ steps {
 	sh ('docker run \
 	--rm=true -t \
 	-v $WORKSPACE/Dockerfile:/Dockerfile \
-	sparklyballs/hadolint /bin/sh -c \
-	"hadolint /Dockerfile | tee -a hadolint_lint.txt"')
+	sparklyballs/hadolint \
+	hadolint /Dockerfile | tee -a hadolint_lint.txt')
 	}
 post {
 always {
