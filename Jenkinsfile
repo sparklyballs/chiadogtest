@@ -44,6 +44,7 @@ steps {
 	ghcr.io/hadolint/hadolint \
 	hadolint $HADOLINT_OPTIONS \
 	/Dockerfile | tee hadolint_lint.txt')
+	recordIssues enabledForFailure: true, tool: hadoLint(pattern: 'hadolint_lint.txt')	
 	}
 	}
 
@@ -77,11 +78,4 @@ sshagent (credentials: ['bd8b00ff-decf-4a75-9e56-1ea2c7d0d708']) {
 	}
 	}
 
-}
-
-post {
-always {
-	recordIssues enabledForFailure: true, tool: hadoLint(pattern: 'hadolint_lint.txt')	
-	}
-	}
 }
