@@ -6,7 +6,6 @@ pipeline {
 options {
 	skipDefaultCheckout(true)
 	buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
-	properties([disableConcurrentBuilds(), throttleJobProperty(categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 0, maxConcurrentTotal: 0, paramsToUseForLimit: '', throttleEnabled: false, throttleOption: 'project'), pipelineTriggers([pollSCM('H/5 * * * *')])])
 	}
 
 environment {
