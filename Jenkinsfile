@@ -66,6 +66,14 @@ steps {
 	}
 	}
 
+stage('Push Tag to Github') {
+steps {
+sshagent ( $CREDS_GITHUB ) {
+    sh('git tag $RELEASE_VER master')
+    sh('git push $CONTAINER_REPOSITORY $RELEASE_VER')
+	}
+	}
+	}
 }
 
 post {
