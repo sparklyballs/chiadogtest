@@ -49,7 +49,7 @@ steps {
 stage('Push Tag to Github') {
 steps {
 sshagent (credentials: ['bd8b00ff-decf-4a75-9e56-1ea2c7d0d708']) {
-    sh('git tag $RELEASE_VER')
+    sh('git tag -f $RELEASE_VER')
     sh('git push -f $CONTAINER_REPOSITORY $RELEASE_VER')
 	}
 	}
