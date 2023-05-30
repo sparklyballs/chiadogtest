@@ -88,7 +88,8 @@ steps {
 	-e DOCKER_REPOSITORY=$CONTAINER_REPOSITORY \
 	-e GIT_BRANCH=master \
         ghcr.io/linuxserver/readme-sync bash -c "node sync"')
-
+	}
+	}
 
 }
 }
