@@ -87,7 +87,7 @@ steps {
 	-e GIT_REPOSITORY=$GITHUB_REPOSITORY \
 	-e DOCKER_REPOSITORY=$CONTAINER_REPOSITORY \
 	-e GIT_BRANCH=master \
-        ghcr.io/linuxserver/readme-sync bash -c 'node sync'')
+        ghcr.io/linuxserver/readme-sync bash -c "node sync"')
 
 
 }
