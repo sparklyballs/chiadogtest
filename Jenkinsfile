@@ -5,6 +5,7 @@ pipeline {
 
 options {
 	skipDefaultCheckout(true)
+	buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
 	}
 
 environment {
