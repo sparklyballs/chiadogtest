@@ -7,6 +7,9 @@ ARG RELEASE
 # environment variables
 ENV TZ="UTC"
 
+# set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # install dependencies
 RUN \
 	apt-get update \
