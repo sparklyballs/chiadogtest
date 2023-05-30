@@ -1,2 +1,2 @@
-blah test version of chiadog docker image
+test version of chiadog docker image
 
