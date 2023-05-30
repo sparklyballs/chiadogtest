@@ -69,15 +69,6 @@ steps {
 	}
 	}
 
-stage('Push Tag to Github') {
-steps {
-sshagent (credentials: ['bd8b00ff-decf-4a75-9e56-1ea2c7d0d708']) {
-    sh('git tag -f $RELEASE_VER')
-    sh('git push -f git@github.com:$GITHUB_REPOSITORY.git $RELEASE_VER')
-	}
-	}
-	}
-
 stage('Readme Sync') {
 steps {
 	sh('docker pull ghcr.io/linuxserver/readme-sync')
@@ -93,3 +84,12 @@ steps {
 
 }
 }
+
+post {
+success {
+sshagent (credentials: ['bd8b00ff-decf-4a75-9e56-1ea2c7d0d708']) {
+    sh('git tag -f $RELEASE_VER')
+    sh('git push -f git@github.com:$GITHUB_REPOSITORY.git $RELEASE_VER')
+	}
+	}
+	}
