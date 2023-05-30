@@ -78,5 +78,17 @@ sshagent (credentials: ['bd8b00ff-decf-4a75-9e56-1ea2c7d0d708']) {
 	}
 	}
 
+stage('Readme Sync') {
+steps {
+	sh('docker pull ghcr.io/linuxserver/readme-sync')
+	sh('docker run --rm=true \
+	-e DOCKERHUB_USERNAME=$CREDS_DOCKERHUB_USR \
+	-e DOCKERHUB_PASSWORD=$CREDS_DOCKERHUB_PSW \
+	-e GIT_REPOSITORY=$GITHUB_REPOSITORY \
+	-e DOCKER_REPOSITORY=$CONTAINER_REPOSITORY \
+	-e GIT_BRANCH=master \
+        ghcr.io/linuxserver/readme-sync bash -c 'node sync'
+
+
 }
 }
