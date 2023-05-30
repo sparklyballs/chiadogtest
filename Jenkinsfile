@@ -81,6 +81,7 @@ steps {
 	ghcr.io/linuxserver/readme-sync bash -c "node sync"')
 	}
 	}
+}
 
 post {
 success {
@@ -91,4 +92,3 @@ sshagent (credentials: ['bd8b00ff-decf-4a75-9e56-1ea2c7d0d708']) {
 	}
 	}
 }
-
