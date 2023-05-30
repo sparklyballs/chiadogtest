@@ -4,9 +4,6 @@ FROM python:3.9 AS chiadog_build
 ARG DEBIAN_FRONTEND=noninteractive
 ARG RELEASE
 
-# set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 # environment variables
 ENV TZ="UTC"
 
