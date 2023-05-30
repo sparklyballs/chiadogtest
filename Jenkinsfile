@@ -13,6 +13,7 @@ environment {
 	CREDS_GITHUB=credentials('bd8b00ff-decf-4a75-9e56-1ea2c7d0d708')
 	CONTAINER_NAME = 'chiadogtest'
 	CONTAINER_REPOSITORY = 'sparklyballs/chiadogtest'
+	GITHUB_REPOSITORY = 'sparklyballs/chiadogtest'
 	HADOLINT_OPTIONS = '--ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json'
 	RELEASE_URL = 'https://api.github.com/repos/martomi/chiadog/releases/latest'
 	}
@@ -46,14 +47,6 @@ steps {
 	}
 	}
 
-stage('Push Tag to Github') {
-steps {
-sshagent (credentials: ['bd8b00ff-decf-4a75-9e56-1ea2c7d0d708']) {
-    sh('git tag -f $RELEASE_VER')
-    sh('git push -f git@github.com:$CONTAINER_REPOSITORY.git $RELEASE_VER')
-	}
-	}
-	}
 
 stage('Build Docker Image') {
 steps {
@@ -72,6 +65,15 @@ steps {
 	sh ('echo $CREDS_DOCKERHUB_PSW | docker login -u $CREDS_DOCKERHUB_USR --password-stdin')
 	sh ('docker image push $CONTAINER_REPOSITORY:latest')
 	sh ('docker image push $CONTAINER_REPOSITORY:$RELEASE_VER')
+	}
+	}
+
+stage('Push Tag to Github') {
+steps {
+sshagent (credentials: ['bd8b00ff-decf-4a75-9e56-1ea2c7d0d708']) {
+    sh('git tag -f $RELEASE_VER')
+    sh('git push -f git@github.com:$GITHUB_REPOSITORY.git $RELEASE_VER')
+	}
 	}
 	}
 
