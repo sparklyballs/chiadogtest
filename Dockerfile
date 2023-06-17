@@ -30,6 +30,7 @@ RUN \
 	RELEASE=$(curl -u "${SECRETUSER}:${SECRETPASS}" -sX GET "https://api.github.com/repos/martomi/chiadog/commits/main" \
 	| jq -r ".sha"); \
 	fi \
+	&& RELEASE="${RELEASE:0:7}" \
 	&& git clone https://github.com/martomi/chiadog.git . \
 	&& git checkout "${RELEASE}" \
 	&& /bin/bash install.sh
