@@ -13,7 +13,7 @@ environment {
 	CREDS_GITHUB=credentials('bd8b00ff-decf-4a75-9e56-1ea2c7d0d708')
 	CONTAINER_NAME = 'chiadogtest'
 	CONTAINER_REPOSITORY = 'sparklyballs/chiadogtest'
-	GITHUB_RELEASE_URL_SUFFIX = 'martomi/chiadog/releases/latest'
+	GITHUB_RELEASE_URL_SUFFIX = 'martomi/chiadog/commits/main'
 	GITHUB_REPOSITORY = 'sparklyballs/chiadogtest'
 	HADOLINT_OPTIONS = '--ignore DL3008 --ignore DL3013 --ignore DL3018 --ignore DL3028 --format json'
 	}
@@ -23,7 +23,7 @@ stages {
 stage('Query Release Version') {
 steps {
 script{
-	env.RELEASE_VER = sh(script: 'curl -sX GET "https://api.github.com/repos/${GITHUB_RELEASE_URL_SUFFIX}" | jq -r ".tag_name"', returnStdout: true).trim() 
+	env.RELEASE_VER = sh(script: 'curl -sX GET "https://api.github.com/repos/${GITHUB_RELEASE_URL_SUFFIX}" | jq -r ".sha"', returnStdout: true).trim() 
 	}
 	}
 	}
